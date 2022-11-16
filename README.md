@@ -9,7 +9,7 @@ Walk through the generated maze against artificial inteligence.
 - [ ] Add Player Controls
 
 
-Ideas
+### Ideas
 
 - Tag game versus AI inside Maze
  - A* algorithm (Heuristic based on smell)
