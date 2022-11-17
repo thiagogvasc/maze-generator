@@ -113,9 +113,7 @@ class Grid {
 
 
 class MazeGenerator {
-    constructor() {
-
-    }
+    constructor() {}
 
     generateMaze(grid) {
         const stack = []
