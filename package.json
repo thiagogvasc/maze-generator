@@ -1,0 +1,22 @@
+{
+  "name": "maze-generator",
+  "version": "1.0.0",
+  "description": "Walk through the generated maze against artificial inteligence.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagogvasc/maze-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thiagogvasc/maze-generator/issues"
+  },
+  "homepage": "https://github.com/thiagogvasc/maze-generator#readme",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
+}
