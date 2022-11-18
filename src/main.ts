@@ -1,28 +1,30 @@
-import { Grid } from './Grid.js'
-import { MazeGenerator } from './MazeGenerator.js'
+import './style.css'
+import { Grid } from './Grid'
+import { Cell } from './Cell'
+import { MazeGenerator } from './MazeGenerator'
 
 
-const canvas = document.querySelector('canvas')
+const canvas: HTMLCanvasElement = document.querySelector('canvas')!
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 canvas.style.backgroundColor = '#d3d3d3'
 
 
-const ctx = canvas.getContext('2d')
+const ctx = canvas.getContext('2d')!
 
 
 
 
 // State
-const grid = new Grid(10, 10, 300, 300, 25, 25)
+const grid = new Grid(10, 10, 300, 300, 11, 11)
+console.log(grid.cells)
 const mazeGenerator = new MazeGenerator()
 mazeGenerator.generateMaze(grid)
 
-const stack = []
-stack.push(grid.cellAt(0, 0))
-
-const goalCell = grid.cellAt(10, 10)
-goalCell.baseFillColor = 'green'
+const stack: Array<Cell> = []
+stack.push(grid.cellAt(0, 0)!)
+const goalCell = grid.cellAt(10, 10)!
+goalCell!.baseFillColor = 'green'
 
 grid.cells.forEach(row => row.forEach(cell => cell.visited = false))
 let goalFound = false
@@ -36,9 +38,9 @@ function mainLoop() {
 
 
     if (stack.length > 0 && !goalFound) {
-        
-        const currCell = stack.pop()
 
+        const currCell = stack.pop()!
+        
         if (currCell.i === goalCell.i && currCell.j === goalCell.j) {
             goalFound = true
             console.log('end')
@@ -50,6 +52,7 @@ function mainLoop() {
         const neighbors = []
         
         // top
+        console.log('heyyy')
         if (grid.cellAt(currCell.i - 1, currCell.j)?.visited === false && currCell.borders.top === false) {
             neighbors.push(grid.cellAt(currCell.i - 1, currCell.j))
         }

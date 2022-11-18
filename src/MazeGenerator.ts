@@ -1,13 +1,17 @@
+import { Grid } from './Grid'
+import { Cell } from './Cell'
+
 export class MazeGenerator {
   constructor() {}
 
-  generateMaze(grid) {
-      const stack = []
-      stack.push(grid.cellAt(0, 0))
+  generateMaze(grid: Grid) {
+      const stack: Array<Cell> = []
+      const initialCell: Cell = grid.cellAt(0, 0)!
+      initialCell && stack.push(initialCell)
 
       while (stack.length > 0) {
       
-          const currCell = stack.pop()
+          const currCell = stack.pop()!
           const neighbors = []
           
           // top
