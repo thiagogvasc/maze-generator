@@ -44,6 +44,7 @@ export class Cell {
   }
 
   draw(ctx: CanvasRenderingContext2D) {
+		
 	  ctx.beginPath()
 	  
 	  const { top, left, bottom, right } = this.borders

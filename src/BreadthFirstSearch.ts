@@ -1,25 +1,27 @@
 import { Grid } from './Grid'
 import { Cell } from './Cell'
 
-export class DepthFirstSearch {
+export class BreadthFirstSearch {
   grid: Grid
-  stack: Cell[]
+  queue: Cell[]
   goalFound: boolean
   goalCell: Cell
 
   constructor(grid: Grid) {
     this.grid = grid
-    this.stack = []
+    this.queue = []
     this.goalFound = false
-    this.goalCell = grid.cellAt(10, 10)!
+    this.goalCell = grid.cellAt(15, 15)!
     this.goalCell.baseFillColor = 'green'
-    this.stack.push(grid.cellAt(0, 0)!)
+    this.queue.push(grid.cellAt(0, 0)!)
   }
 
   execute() {
-    while (this.stack.length > 0 && !this.goalFound) {
+    while (this.queue.length > 0 && !this.goalFound) {
         
-      const currCell = this.stack.pop()!
+      const currCell = this.queue.shift()!
+      if (!currCell.visited)
+        currCell.visited = true
     
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
@@ -29,47 +31,44 @@ export class DepthFirstSearch {
       
       currCell.frameFillColor = 'blue'
       currCell.baseFillColor = 'red'
-      const neighbors = []
+      const neighbors: Cell[] = []
       
       // top
       if (this.grid.cellAt(currCell.i - 1, currCell.j)?.visited === false && currCell.borders.top === false) {
-          neighbors.push(this.grid.cellAt(currCell.i - 1, currCell.j))
+          neighbors.push(this.grid.cellAt(currCell.i - 1, currCell.j)!)
       }
     
       // left
       if (this.grid.cellAt(currCell.i, currCell.j - 1)?.visited === false && currCell.borders.left === false) {
-          neighbors.push(this.grid.cellAt(currCell.i, currCell.j - 1))
+          neighbors.push(this.grid.cellAt(currCell.i, currCell.j - 1)!)
       }
     
       // bottom
       if (this.grid.cellAt(currCell.i + 1, currCell.j)?.visited === false && currCell.borders.bottom === false) {
-          neighbors.push(this.grid.cellAt(currCell.i + 1, currCell.j))
+          neighbors.push(this.grid.cellAt(currCell.i + 1, currCell.j)!)
       }
     
       // right
       if (this.grid.cellAt(currCell.i, currCell.j + 1)?.visited === false && currCell.borders.right === false) {
-          neighbors.push(this.grid.cellAt(currCell.i, currCell.j + 1))
+          neighbors.push(this.grid.cellAt(currCell.i, currCell.j + 1)!)
       }
       
-      if (neighbors.length > 0) {
-          this.stack.push(currCell)
-      }
-    
-      const chosenCell = neighbors[Math.floor(Math.random() * neighbors.length)]
-    
-      if (chosenCell) {
-          chosenCell.visited = true
-          this.stack.push(chosenCell)
-      }
+      neighbors.forEach(cell => {
+        if (!cell.visited) {
+          this.queue.push(cell)
+        }
+      })
     }
   }
 
   update() {
-    if (this.stack.length > 0 && !this.goalFound) {
+    if (this.queue.length > 0 && !this.goalFound) {
         
-      const currCell = this.stack.pop()!
-      console.log(this.stack)
-    
+      const currCell = this.queue.shift()!
+
+      if (!currCell.visited)
+        currCell.visited = true
+      
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
           console.log('end')
@@ -77,39 +76,34 @@ export class DepthFirstSearch {
       }
       
       currCell.frameFillColor = 'blue'
-      currCell.baseFillColor = 'red'
-      const neighbors = []
+      currCell.baseFillColor = 'blue'
+      const neighbors: Cell[] = []
       
       // top
       if (this.grid.cellAt(currCell.i - 1, currCell.j)?.visited === false && currCell.borders.top === false) {
-          neighbors.push(this.grid.cellAt(currCell.i - 1, currCell.j))
+          neighbors.push(this.grid.cellAt(currCell.i - 1, currCell.j)!)
       }
     
       // left
       if (this.grid.cellAt(currCell.i, currCell.j - 1)?.visited === false && currCell.borders.left === false) {
-          neighbors.push(this.grid.cellAt(currCell.i, currCell.j - 1))
+          neighbors.push(this.grid.cellAt(currCell.i, currCell.j - 1)!)
       }
     
       // bottom
       if (this.grid.cellAt(currCell.i + 1, currCell.j)?.visited === false && currCell.borders.bottom === false) {
-          neighbors.push(this.grid.cellAt(currCell.i + 1, currCell.j))
+          neighbors.push(this.grid.cellAt(currCell.i + 1, currCell.j)!)
       }
     
       // right
       if (this.grid.cellAt(currCell.i, currCell.j + 1)?.visited === false && currCell.borders.right === false) {
-          neighbors.push(this.grid.cellAt(currCell.i, currCell.j + 1))
+          neighbors.push(this.grid.cellAt(currCell.i, currCell.j + 1)!)
       }
       
-      if (neighbors.length > 0) {
-          this.stack.push(currCell)
-      }
-    
-      const chosenCell = neighbors[Math.floor(Math.random() * neighbors.length)]
-    
-      if (chosenCell) {
-          chosenCell.visited = true
-          this.stack.push(chosenCell)
-      }
+      neighbors.forEach(cell => {
+        if (!cell.visited) {
+          this.queue.push(cell)
+        }
+      })
     }
   }
 }

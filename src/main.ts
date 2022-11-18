@@ -2,6 +2,8 @@ import './style.css'
 import { Grid } from './Grid'
 import { Cell } from './Cell'
 import { MazeGenerator } from './MazeGenerator'
+import { DepthFirstSearch } from './DepthFirstSearch'
+import { BreadthFirstSearch } from './BreadthFirstSearch'
 
 
 const canvas: HTMLCanvasElement = document.querySelector('canvas')!
@@ -16,82 +18,42 @@ const ctx = canvas.getContext('2d')!
 
 
 // State
-const grid = new Grid(10, 10, 300, 300, 11, 11)
-console.log(grid.cells)
+const grid = new Grid(10, 10, 500, 500, 20, 20)
+//console.log(grid.cells)
 const mazeGenerator = new MazeGenerator()
 mazeGenerator.generateMaze(grid)
 
-const stack: Array<Cell> = []
-stack.push(grid.cellAt(0, 0)!)
-const goalCell = grid.cellAt(10, 10)!
-goalCell!.baseFillColor = 'green'
+
 
 grid.cells.forEach(row => row.forEach(cell => cell.visited = false))
-let goalFound = false
+
+let dfs = new BreadthFirstSearch(grid)
+dfs.execute()
+console.log(dfs)
+
+const maxFPS = 60
+let fps = 0
+const fpsElem = document.getElementById('fps')
+fpsElem!.innerText = `FPS: ${fps}`
+
+let startTime = Date.now()
+let currentTime = startTime
+let elapsedTime = currentTime - startTime
+
+setInterval(() => fpsElem!.innerText = `FPS: ${fps}`, 100)
+
+grid.draw(ctx)
+function launch() {
+    currentTime = Date.now()
+    elapsedTime = currentTime - startTime
+    startTime = currentTime
+    fps = Math.floor(1 / (elapsedTime/1000))
 
 
+    requestAnimationFrame(launch)
 
-// Loop
-function mainLoop() {
+    
     grid.draw(ctx)
     grid.update()
-
-
-    if (stack.length > 0 && !goalFound) {
-
-        const currCell = stack.pop()!
-        
-        if (currCell.i === goalCell.i && currCell.j === goalCell.j) {
-            goalFound = true
-            console.log('end')
-            return
-        }
-        
-        currCell.frameFillColor = 'blue'
-        currCell.baseFillColor = 'red'
-        const neighbors = []
-        
-        // top
-        console.log('heyyy')
-        if (grid.cellAt(currCell.i - 1, currCell.j)?.visited === false && currCell.borders.top === false) {
-            neighbors.push(grid.cellAt(currCell.i - 1, currCell.j))
-        }
-
-        // left
-        if (grid.cellAt(currCell.i, currCell.j - 1)?.visited === false && currCell.borders.left === false) {
-            neighbors.push(grid.cellAt(currCell.i, currCell.j - 1))
-        }
-
-        // bottom
-        if (grid.cellAt(currCell.i + 1, currCell.j)?.visited === false && currCell.borders.bottom === false) {
-            neighbors.push(grid.cellAt(currCell.i + 1, currCell.j))
-        }
-
-        // right
-        if (grid.cellAt(currCell.i, currCell.j + 1)?.visited === false && currCell.borders.right === false) {
-            neighbors.push(grid.cellAt(currCell.i, currCell.j + 1))
-        }
-        
-        if (neighbors.length > 0) {
-            stack.push(currCell)
-        }
-
-        const chosenCell = neighbors[Math.floor(Math.random() * neighbors.length)]
-
-        if (chosenCell) {
-            chosenCell.visited = true
-            stack.push(chosenCell)
-        }
-    }
 }
-
-
-
-function launch() {
-    //requestAnimationFrame(launch)
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    mainLoop()
-}
-//launch()
-
-setInterval(launch, 10)
+launch()

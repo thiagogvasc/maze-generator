@@ -42,7 +42,9 @@ export class Grid {
 		ctx.beginPath()
 		ctx.rect(this.x, this.y, this.width, this.height)
 		ctx.stroke()
+		
 		this.cells.forEach(row => row.forEach(cell => cell.draw(ctx)))
+		
   }
 
   update() {
