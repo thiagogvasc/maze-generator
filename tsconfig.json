@@ -14,7 +14,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "baseUrl": "https://thiagogvasc.github.io/maze-generator"
   },
   "include": ["src"]
 }
