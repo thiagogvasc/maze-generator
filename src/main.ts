@@ -1,8 +1,8 @@
 import './style.css'
 import { Grid } from './Grid'
-import { Cell } from './Cell'
+//import { Cell } from './Cell'
 import { MazeGenerator } from './MazeGenerator'
-import { DepthFirstSearch } from './DepthFirstSearch'
+//import { DepthFirstSearch } from './DepthFirstSearch'
 import { BreadthFirstSearch } from './BreadthFirstSearch'
 
 
@@ -31,7 +31,6 @@ let dfs = new BreadthFirstSearch(grid)
 dfs.execute()
 console.log(dfs)
 
-const maxFPS = 60
 let fps = 0
 const fpsElem = document.getElementById('fps')
 fpsElem!.innerText = `FPS: ${fps}`
