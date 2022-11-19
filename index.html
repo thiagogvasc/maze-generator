@@ -8,7 +8,20 @@
   </head>
   <body>
     <h2 id="fps"></h2>
-    <canvas></canvas>
-    <script type="module" src="./src/main.ts"></script>
+    <div id="app">
+      <div class="canvas-container">
+        <canvas></canvas>
+      </div>
+      <div class="settings-container"> 
+        <label for="algorithms">Choose a car:</label>
+        <select name="algorithms" id="algorithms">
+          <option value="dfs">Depth First Search</option>
+          <option value="bfs">Breadth First Search</option>
+        </select>
+        <button id="run">Run</button>
+        <button id="generate-maze">Generate Maze</button>
+      </div>
+      <script type="module" src="./src/main.ts"></script>
+    </div>
   </body>
 </html>

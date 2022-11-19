@@ -1,7 +1,8 @@
 import { Grid } from './Grid'
 import { Cell } from './Cell'
+import { SearchAlgorithm } from './SearchAlgorithm'
 
-export class BreadthFirstSearch {
+export class BreadthFirstSearch implements SearchAlgorithm {
   grid: Grid
   queue: Cell[]
   goalFound: boolean
@@ -13,7 +14,7 @@ export class BreadthFirstSearch {
     this.goalFound = false
     this.goalCell = grid.cellAt(15, 15)!
     this.goalCell.baseFillColor = 'green'
-    this.queue.push(grid.cellAt(0, 0)!)
+    this.queue.push(grid.cellAt(5, 0)!)
   }
 
   execute() {
@@ -76,7 +77,7 @@ export class BreadthFirstSearch {
       }
       
       currCell.frameFillColor = 'blue'
-      currCell.baseFillColor = 'blue'
+      currCell.baseFillColor = 'red'
       const neighbors: Cell[] = []
       
       // top

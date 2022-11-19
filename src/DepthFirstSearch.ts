@@ -1,7 +1,8 @@
 import { Grid } from './Grid'
 import { Cell } from './Cell'
+import { SearchAlgorithm } from './SearchAlgorithm'
 
-export class DepthFirstSearch {
+export class DepthFirstSearch implements SearchAlgorithm {
   grid: Grid
   stack: Cell[]
   goalFound: boolean
@@ -13,7 +14,7 @@ export class DepthFirstSearch {
     this.goalFound = false
     this.goalCell = grid.cellAt(10, 10)!
     this.goalCell.baseFillColor = 'green'
-    this.stack.push(grid.cellAt(0, 0)!)
+    this.stack.push(grid.cellAt(5, 0)!)
   }
 
   execute() {
@@ -102,6 +103,8 @@ export class DepthFirstSearch {
       
       if (neighbors.length > 0) {
           this.stack.push(currCell)
+      } else {
+        currCell.baseFillColor = 'darkred'
       }
     
       const chosenCell = neighbors[Math.floor(Math.random() * neighbors.length)]
