@@ -47,6 +47,7 @@ generateMazeButtonElem.onclick = () => {
         cell.frameFillColor = 'transparent'
     }))
     mazeGenerator.generateMaze(grid)
+    runAlgorithm = false
 }
 
 runButtonElem.onclick = () => {
@@ -78,6 +79,7 @@ function loop() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     grid.draw(ctx)
+    console.log(runAlgorithm)
     runAlgorithm && algorithm?.update()
 }
 loop()
