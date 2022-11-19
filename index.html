@@ -5,12 +5,25 @@
     <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maze generator</title>
-    <script type="module" crossorigin src="/maze-generator/assets/index.99c9d3fa.js"></script>
-    <link rel="stylesheet" href="/maze-generator/assets/index.5578816f.css">
+    <script type="module" crossorigin src="/maze-generator/assets/index.fab55345.js"></script>
+    <link rel="stylesheet" href="/maze-generator/assets/index.4ff90eaa.css">
   </head>
   <body>
     <h2 id="fps"></h2>
-    <canvas></canvas>
-    
+    <div id="app">
+      <div class="canvas-container">
+        <canvas></canvas>
+      </div>
+      <div class="settings-container"> 
+        <label for="algorithms">Choose a car:</label>
+        <select name="algorithms" id="algorithms">
+          <option value="dfs">Depth First Search</option>
+          <option value="bfs">Breadth First Search</option>
+        </select>
+        <button id="run">Run</button>
+        <button id="generate-maze">Generate Maze</button>
+      </div>
+      
+    </div>
   </body>
 </html>
