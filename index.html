@@ -18,7 +18,35 @@
           <option value="dfs">Depth First Search</option>
           <option value="bfs">Breadth First Search</option>
         </select>
+
+
+        <div>
+          <div>Initial node</div>
+          <label for="initial-node-x">X:</label>
+          <input id="initial-node-x" name="initial-node-x" size="5">
+          <span id="initial-node-x-msg"></span>
+          
+          <label for="initial-node-y">Y:</label>
+          <input id="initial-node-y" name="initial-node-y" size="5">
+          <span id="initial-node-y-msg"></span>
+        </div>
+
+        <div>
+          <div>Goal node</div>
+          <label for="goal-node-x">X:</label>
+          <input id="goal-node-x" name="goal-node-x" size="5">
+          <span id="goal-node-x-msg"></span>
+          
+          <label for="goal-node-y">Y:</label>
+          <input id="goal-node-y" name="goal-node-y" size="5">
+          <span id="goal-node-y-msg"></span>
+        </div>
+        
+
+
         <button id="run">Run</button>
+        <button id="stop">Stop</button>
+        <button id="clear">Clear</button>
         <button id="generate-maze">Generate Maze</button>
       </div>
       <script type="module" src="./src/main.ts"></script>

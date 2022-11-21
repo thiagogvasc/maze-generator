@@ -33,7 +33,7 @@ export class Grid {
   }
 
   cellAt(i: number, j: number) {
-		if (i < 0 || j < 0 || i >= this.cols || j >= this.rows) return undefined
+		if (i < 0 || j < 0 || i >= this.rows || j >= this.cols) return undefined
 
 		return this.cells[i][j]
   }

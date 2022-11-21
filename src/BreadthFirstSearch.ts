@@ -7,14 +7,20 @@ export class BreadthFirstSearch implements SearchAlgorithm {
   queue: Cell[]
   goalFound: boolean
   goalCell: Cell
+  _finished: boolean
 
-  constructor(grid: Grid) {
+  constructor(grid: Grid, initialNode: Cell, goalNode: Cell) {
     this.grid = grid
     this.queue = []
     this.goalFound = false
-    this.goalCell = grid.cellAt(15, 15)!
+    this.goalCell = goalNode
     this.goalCell.baseFillColor = 'green'
-    this.queue.push(grid.cellAt(5, 0)!)
+    this.queue.push(initialNode)
+    this._finished = false
+  }
+
+  finished() {
+    return this._finished
   }
 
   execute() {
@@ -26,6 +32,7 @@ export class BreadthFirstSearch implements SearchAlgorithm {
     
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
+          this._finished = true
           console.log('end')
           return
       }
@@ -72,6 +79,7 @@ export class BreadthFirstSearch implements SearchAlgorithm {
       
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
+          this._finished = true
           console.log('end')
           return
       }

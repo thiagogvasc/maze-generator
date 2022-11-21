@@ -7,14 +7,21 @@ export class DepthFirstSearch implements SearchAlgorithm {
   stack: Cell[]
   goalFound: boolean
   goalCell: Cell
+  _finished: boolean
 
-  constructor(grid: Grid) {
+  constructor(grid: Grid, initialNode: Cell, goalNode: Cell) {
     this.grid = grid
     this.stack = []
     this.goalFound = false
-    this.goalCell = grid.cellAt(10, 10)!
+    this.goalCell = goalNode
     this.goalCell.baseFillColor = 'green'
-    this.stack.push(grid.cellAt(5, 0)!)
+    initialNode.baseFillColor = 'blue'
+    this.stack.push(initialNode)
+    this._finished = false
+  }
+
+  finished() {
+    return this._finished
   }
 
   execute() {
@@ -24,6 +31,7 @@ export class DepthFirstSearch implements SearchAlgorithm {
     
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
+          this._finished = true
           console.log('end')
           return
       }
@@ -73,6 +81,7 @@ export class DepthFirstSearch implements SearchAlgorithm {
     
       if (currCell.i === this.goalCell.i && currCell.j === this.goalCell.j) {
           this.goalFound = true
+          this._finished = true
           console.log('end')
           return
       }
